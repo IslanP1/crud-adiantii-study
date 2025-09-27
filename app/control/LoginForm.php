@@ -2,6 +2,7 @@
 
 use Adianti\Control\TAction;
 use Adianti\Control\TPage;
+use Adianti\Core\AdiantiCoreApplication;
 use Adianti\Database\TFilter;
 use Adianti\Database\TRepository;
 use Adianti\Database\TTransaction;
@@ -34,6 +35,7 @@ class LoginForm extends TPage
         $senha->setProperty('type', 'password');
 
         $this->form->addAction('Entrar', new TAction([$this, 'onLogin']), 'fa:sign-in green');
+        $this->form->addActionLink('Cadastrar', new TAction([$this, 'goCadastro']), 'fa:user-plus blue');
 
         parent::add($this->form);
     }
@@ -48,7 +50,7 @@ class LoginForm extends TPage
 
             $cliente = $repo->load($criteria)[0] ?? null;
 
-            if ($cliente && $cliente->validarSenha($param['senha'])) {
+            if ($cliente && $cliente->check_senha($param['senha'])) {
                 // Login bem-sucedido
                 TSession::setValue('cliente_id', $cliente->id);
                 new TMessage('info', 'Login bem-sucedido! Bem-vindo, ' . $cliente->nome);
@@ -64,6 +66,9 @@ class LoginForm extends TPage
             new TMessage('error', $e->getMessage());
         }
     }
-    
-    
+
+    public static function goCadastro($param = null)
+    {
+        AdiantiCoreApplication::gotoPage('ClientForm');
+    }
 }
