@@ -42,7 +42,7 @@ return [
           'SystemRegistrationForm',
           'SystemPasswordRenewalForm',
           'SystemConcurrentAccessView',
-          'LoginForm',
+          'LoginFormClient',
           'ClientForm',
           'ProductForm',
         ],

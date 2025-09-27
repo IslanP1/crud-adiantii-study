@@ -13,7 +13,7 @@ use Adianti\Registry\TSession;
 use Adianti\Database\TCriteria;
 use Adianti\Widget\Dialog\TMessage;
 
-class LoginForm extends TPage
+class LoginFormClient extends TPage
 {
     protected $form;
     public function __construct()

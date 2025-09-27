@@ -2,6 +2,7 @@
 
 use Adianti\Control\TAction;
 use Adianti\Control\TPage;
+use Adianti\Core\AdiantiCoreApplication;
 use Adianti\Database\TTransaction;
 use Adianti\Registry\TSession;
 use Adianti\Widget\Dialog\TMessage;
@@ -16,6 +17,13 @@ class ProductForm extends TPage
     public function __construct()
     {
         parent::__construct();
+
+        // verifica se o cliente está logado
+        if (!TSession::getValue('cliente_logged')) {
+            // redireciona direto para evitar modal/loop duplicado
+            AdiantiCoreApplication::gotoPage('LoginForm');
+            return;
+        }
 
         // criando o form
         $this->form = new BootstrapFormBuilder('form_Product');
@@ -71,12 +79,13 @@ class ProductForm extends TPage
         }
     }
 
-    /**
-     * Load handler to display this form
-     */
-    public function onLoad($param = null)
+    public function goLogin($param=null)
     {
-        // This method is called when the form is loaded
-        // The form is already created in the constructor, so we don't need to do anything special here
+        try {  
+            AdiantiCoreApplication::gotoPage('LoginForm');
+        } catch (Exception $e) {
+            TTransaction::rollback();
+            new TMessage('error', $e->getMessage());
+        }
     }
 }

@@ -66,6 +66,10 @@ else
     }
     else
     {
-        AdiantiCoreApplication::loadPage('LoginForm', '', $_REQUEST);
+        if ($class === 'LoginForm') {
+            AdiantiCoreApplication::loadPage('LoginForm', '', $_REQUEST);
+        } else {
+            AdiantiCoreApplication::loadPage('LoginFormClient', '', $_REQUEST);
+        }
     }
 }
