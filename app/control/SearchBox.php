@@ -75,7 +75,7 @@ class SearchBox extends TPage
             $program = $param['input'][0];
             if ($program)
             {
-                TApplication::loadPage($program);
+                AdiantiCoreApplication::loadPage($program);
                 TScript::create('Template.findQueryStringMenuItem(true)', true, 300);
             }
         }
