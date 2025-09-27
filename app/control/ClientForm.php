@@ -82,7 +82,7 @@ class ClientForm extends TPage
             $cliente->store();
 
             new TMessage('info', 'Cliente cadastrado com sucesso!');
-            $this->form->clear();
+            // $this->form->clear();
             
             TTransaction::close();
             

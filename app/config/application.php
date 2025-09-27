@@ -43,7 +43,8 @@ return [
           'SystemPasswordRenewalForm',
           'SystemConcurrentAccessView',
           'LoginForm',
-          'ClientForm'
+          'ClientForm',
+          'ProductForm',
         ],
         'user_register' => '1',
         'reset_password' => '1',

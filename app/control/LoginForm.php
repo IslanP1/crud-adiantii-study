@@ -16,12 +16,13 @@ use Adianti\Widget\Dialog\TMessage;
 class LoginForm extends TPage
 {
     protected $form;
-    public function __construct(){
-        parent:: __construct();
+    public function __construct()
+    {
+        parent::__construct();
 
         $this->form = new BootstrapFormBuilder('form_login');
         $this->form->setFormTitle('Login');
-        
+
         $email = new TEntry('email');
         $senha = new TEntry('senha');
 
@@ -40,7 +41,8 @@ class LoginForm extends TPage
         parent::add($this->form);
     }
 
-    public function onLogin($param){
+    public function onLogin($param)
+    {
         try {
             TTransaction::open('crudestudo');
 
@@ -53,8 +55,14 @@ class LoginForm extends TPage
             if ($cliente && $cliente->check_senha($param['senha'])) {
                 // Login bem-sucedido
                 TSession::setValue('cliente_id', $cliente->id);
+                TSession::setValue('cliente_logged', true);
+                TSession::setValue('cliente_user', $cliente);
+                
+                TTransaction::close();
+                
                 new TMessage('info', 'Login bem-sucedido! Bem-vindo, ' . $cliente->nome);
-                // AdiantiCoreApplication::gotoPage('ProdutoList');
+                AdiantiCoreApplication::gotoPage('ProductForm');
+                return;
             } else {
                 // Login falhou
                 new TMessage('error', 'Usuário ou senha inválidos');
@@ -65,6 +73,11 @@ class LoginForm extends TPage
             TTransaction::rollback();
             new TMessage('error', $e->getMessage());
         }
+    }
+
+    public function goProduct($param = null)
+    {
+        AdiantiCoreApplication::gotoPage('ProductForm');
     }
 
     public static function goCadastro($param = null)
