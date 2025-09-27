@@ -1,10 +1,10 @@
 <?php
 return [
-    'host'  =>  "",
-    'port'  =>  "",
-    'name'  =>  "app/database/permission.db",
-    'user'  =>  "",
-    'pass'  =>  "",
-    'type'  =>  "sqlite",
+    'host'  =>  $_ENV['DB_HOST'],
+    'port'  =>  $_ENV['DB_PORT'],
+    'name'  =>  "estudocrudpermission",
+    'user'  =>  $_ENV['DB_USERNAME'],
+    'pass'  =>  $_ENV['DB_PASSWORD'],
+    'type'  =>  $_ENV['DB_TYPE'],
     'prep'  =>  "1"
 ];
