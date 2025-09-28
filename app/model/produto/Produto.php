@@ -7,11 +7,7 @@ class Produto extends TRecord
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
 
-    public function __construct($id = NULL, $callObjectLoad = TRUE)
-    {
-        parent::__construct($id, $callObjectLoad);
-        parent::addAttribute('nome');
-        parent::addAttribute('preco');
-        parent::addAttribute('cliente_id');
-    }
+    // OBS: 'max' é o default e usa a maior chave + 1
+    // o adianti já lhe fornece os campos criados no banco de dados
+    // para saber quais são, veja a tabela no seu banco de dados
 }
