@@ -45,6 +45,7 @@ return [
           'LoginFormClient',
           'ClientForm',
           'ProductForm',
+          'ProductListForm',
         ],
         'user_register' => '1',
         'reset_password' => '1',

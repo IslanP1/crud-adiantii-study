@@ -76,6 +76,9 @@ class ClientForm extends TPage
             $data['nome'] = $param['nome'];
             $data['email'] = $param['email'];
 
+            // comparando com js
+            // let array = [], ['nome': $param['nome'], 'email': $param['email']]
+
             $cliente = new Cliente;
             $cliente->fromArray($data);
             $cliente->set_senha($param['senha']);
@@ -99,6 +102,6 @@ class ClientForm extends TPage
 
     public static function goLogin($param = null)
     {
-        AdiantiCoreApplication::gotoPage('LoginForm');
+        AdiantiCoreApplication::gotoPage('LoginFormClient');
     }
 }
